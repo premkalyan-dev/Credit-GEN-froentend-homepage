@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paisabazaar - Personal Finance Platform</title>
+    <title>CreditGenAI - Personal Finance Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -34,6 +34,7 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(180deg, #eefbff 0%, #cfefff 42%, #9fddff 75%, #7ad4f5 100%);
         }
 
         @keyframes slideIn {
@@ -49,6 +50,11 @@
 
         .product-tile {
             animation: slideIn 0.5s ease-out forwards;
+            background:
+                radial-gradient(circle at top left, rgba(154, 191, 255, 0.45) 0%, rgba(154, 191, 255, 0.12) 22%, rgba(255, 255, 255, 0.96) 55%),
+                linear-gradient(145deg, rgba(255, 255, 255, 0.98) 0%, rgba(214, 235, 255, 0.96) 52%, rgba(171, 204, 235, 0.92) 100%);
+            border-color: rgba(115, 157, 201, 0.45);
+            box-shadow: 0 12px 28px rgba(78, 126, 176, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.75);
         }
 
         .product-tile::before {
@@ -58,7 +64,7 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, #6BC34A 0%, #F5A623 100%);
+            background: linear-gradient(90deg, #4ca7e6 0%, #1e5aae 100%);
             transform: scaleX(0);
             transform-origin: left;
             transition: transform 0.3s;
@@ -68,6 +74,65 @@
             transform: scaleX(1);
         }
 
+        .glass-card {
+            background:
+                radial-gradient(circle at top left, rgba(160, 198, 255, 0.4) 0%, rgba(160, 198, 255, 0.1) 24%, rgba(255, 255, 255, 0.97) 58%),
+                linear-gradient(150deg, rgba(255, 255, 255, 0.98) 0%, rgba(220, 240, 255, 0.96) 55%, rgba(185, 214, 240, 0.94) 100%);
+            border: 1px solid rgba(123, 166, 210, 0.35);
+            box-shadow: 0 14px 32px rgba(73, 119, 167, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.78);
+        }
+
+        @keyframes personalLoanShine {
+            0% {
+                transform: translateX(-160%) skewX(-22deg);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.18;
+            }
+            45% {
+                transform: translateX(220%) skewX(-22deg);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(220%) skewX(-22deg);
+                opacity: 0;
+            }
+        }
+
+        .product-tile--shiny::after {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: 0;
+            width: 42%;
+            height: 140%;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.55) 50%, rgba(255, 255, 255, 0) 100%);
+            animation: personalLoanShine 3.8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .coming-soon-corner {
+            position: absolute;
+            top: 18px;
+            right: -24px;
+            min-width: 122px;
+            padding: 0.22rem 0.65rem;
+            transform: rotate(38deg);
+            background: linear-gradient(135deg, #6BC34A 0%, #4ea934 100%);
+            color: #ffffff;
+            font-size: 8px;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            line-height: 1.1;
+            text-align: center;
+            white-space: nowrap;
+            text-transform: uppercase;
+            box-shadow: 0 8px 18px rgba(78, 169, 52, 0.3);
+            z-index: 2;
+        }
+
+
         .product-tile:nth-child(1) { animation-delay: 0.05s; }
         .product-tile:nth-child(2) { animation-delay: 0.1s; }
         .product-tile:nth-child(3) { animation-delay: 0.15s; }
@@ -76,16 +141,118 @@
         .product-tile:nth-child(6) { animation-delay: 0.3s; }
         .product-tile:nth-child(7) { animation-delay: 0.35s; }
         .product-tile:nth-child(8) { animation-delay: 0.4s; }
+
+        .hero-slide {
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            object-position: center;
+            background: #ffffff;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-slide--wide {
+            object-fit: cover;
+            transform: scale(1.02);
+        }
+
+        .hero-slide--standard {
+            object-fit: cover;
+        }
+
+        .mobile-nav {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .mobile-nav.is-open {
+            max-height: 240px;
+        }
+
+        .emi-calculator-panel {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transform: perspective(1000px) rotateX(-12deg) translateY(12px);
+            transform-origin: top center;
+            transition: max-height 0.35s ease, opacity 0.3s ease, transform 0.35s ease, margin-top 0.3s ease;
+        }
+
+        .emi-calculator-panel.is-open {
+            max-height: 900px;
+            opacity: 1;
+            transform: perspective(1000px) rotateX(0deg) translateY(0);
+            margin-top: 1rem;
+        }
+
+        .emi-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #2f67e8 0%, #dfe6f2 0%);
+            outline: none;
+        }
+
+        .emi-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border: 0;
+            border-radius: 999px;
+            background: #2f67e8;
+            box-shadow: 0 8px 20px rgba(47, 103, 232, 0.28);
+            cursor: pointer;
+        }
+
+        .emi-slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border: 0;
+            border-radius: 999px;
+            background: #2f67e8;
+            box-shadow: 0 8px 20px rgba(47, 103, 232, 0.28);
+            cursor: pointer;
+        }
+
+        .emi-slider::-moz-range-track {
+            height: 6px;
+            border-radius: 999px;
+            background: #dfe6f2;
+        }
+
+        @media (max-width: 767px) {
+            body {
+                padding: 0;
+            }
+
+            .coming-soon-corner {
+                top: 14px;
+                right: -28px;
+                min-width: 108px;
+                font-size: 7px;
+                padding: 0.18rem 0.48rem;
+            }
+
+            .product-tile {
+                min-height: 122px;
+            }
+        }
     </style>
 </head>
-<body class="bg-[#e9eef5] p-2 text-textDark leading-6 sm:p-3">
-    <div class="min-h-screen overflow-hidden rounded-[24px] border border-borderLight bg-background">
-    <header class="sticky top-0 z-[1000] border-b border-borderLight bg-white shadow-header">
+<body class="min-h-screen p-0 text-textDark leading-6 sm:p-3">
+    <div class="min-h-screen overflow-hidden rounded-none border border-white/30 pt-[56px] sm:rounded-[24px] sm:pt-[60px] md:pt-[65px]" style="background: linear-gradient(180deg, #eefbff 0%, #d6f2ff 32%, #afe5ff 68%, #86d7f7 100%);">
+    <header class="fixed left-0 right-0 top-0 z-[1000] border-b border-borderLight bg-white shadow-header">
         <div class="max-w-full px-4">
-            <div class="mx-auto flex h-[50px] max-w-[1400px] items-center justify-between sm:h-[55px] md:h-[65px]">
-                <a href="#" class="flex min-w-fit items-center gap-2 text-sm font-bold text-primaryBlue no-underline sm:text-base md:text-[20px]">
+            <div class="mx-auto flex h-[56px] max-w-[1400px] items-center justify-between gap-3 sm:h-[60px] md:h-[65px]">
+                <a href="#" class="flex min-w-0 items-center gap-2 text-sm font-bold text-primaryBlue no-underline sm:text-base md:text-[20px]">
                     <span class="text-[20px] text-primaryBlue sm:text-[22px] md:text-[24px]">&#9679;</span>
-                    <span>CreditGenAI</span>
+                    <span class="truncate">CreditGenAI</span>
                 </a>
 
                 <nav class="mx-10 hidden flex-1 items-center gap-8 md:flex">
@@ -94,31 +261,43 @@
                     <a href="#mission-vision" class="relative text-sm font-medium text-textDark transition-colors duration-300 after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-primaryBlue after:transition-all after:duration-300 hover:text-primaryBlue hover:after:w-full">Mission & Vision</a>
                 </nav>
 
-                <div class="flex items-center gap-2 sm:gap-2 md:gap-3">
+                <div class="hidden items-center gap-2 sm:flex md:gap-3">
                     <button class="rounded-md border-none bg-primaryBlue px-3 py-2 text-xs font-semibold text-white shadow-headerBtn transition-all duration-300 hover:-translate-y-0.5 hover:bg-primaryLight hover:shadow-headerBtnHover sm:px-4 md:px-5 md:text-sm">SIGN IN</button>
                 </div>
 
-                <button class="text-2xl md:hidden">&#9776;</button>
+                <button id="mobile-menu-button" class="rounded-md p-2 text-2xl text-primaryBlue md:hidden" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+            </div>
+
+            <div id="mobile-nav" class="mobile-nav md:hidden">
+                <nav class="flex flex-col gap-1 pb-4 pt-1">
+                    <a href="#products" class="rounded-lg px-3 py-2 text-sm font-medium text-textDark transition-colors duration-300 hover:bg-primaryBlue/10 hover:text-primaryBlue">Products</a>
+                    <a href="#about" class="rounded-lg px-3 py-2 text-sm font-medium text-textDark transition-colors duration-300 hover:bg-primaryBlue/10 hover:text-primaryBlue">About</a>
+                    <a href="#mission-vision" class="rounded-lg px-3 py-2 text-sm font-medium text-textDark transition-colors duration-300 hover:bg-primaryBlue/10 hover:text-primaryBlue">Mission & Vision</a>
+                    <button class="mt-2 rounded-md border-none bg-primaryBlue px-4 py-2 text-sm font-semibold text-white shadow-headerBtn transition-all duration-300 hover:bg-primaryLight">SIGN IN</button>
+                </nav>
             </div>
         </div>
     </header>
 
-    <section class="overflow-hidden bg-gradient-to-br from-primaryBlue to-primaryLight px-4 py-5 text-white sm:py-[30px]">
-        <div class="mx-auto flex max-w-[1400px] flex-col items-center justify-between gap-5 md:flex-row md:gap-[30px]">
-            <div class="min-w-0 flex-1">
-                <h1 class="mb-[10px] text-[20px] font-bold leading-[1.3] sm:mb-3 sm:text-2xl md:text-[32px]">AI-Powered Credit Solutions for Everyone</h1>
-                <p class="mb-4 text-[13px] leading-[1.5] opacity-95 sm:mb-5 sm:text-sm md:text-[15px]">Get instant access to credit products tailored by AI. Quick approval &#8226; Transparent process &#8226; Better rates</p>
-                <div class="mt-4 flex justify-center gap-2 md:justify-start">
+    <section class="overflow-hidden px-4 py-5 text-textDark sm:py-[30px]" style="background: radial-gradient(circle at center, #8fdcff 0%, #68c6f2 36%, #4ca7e6 68%, #2f79c9 100%);">
+        <div class="mx-auto flex max-w-[1400px] flex-col items-center justify-between gap-6 md:flex-row md:gap-[30px]">
+            <div class="min-w-0 flex-1 text-center md:text-left">
+                <h1 class="mb-[10px] text-[22px] font-bold leading-[1.25] sm:mb-3 sm:text-[28px] md:text-[32px]">AI-Powered Credit Solutions for Everyone</h1>
+                <p class="mb-4 text-[14px] leading-[1.6] opacity-95 sm:mb-5 sm:text-sm md:max-w-[560px] md:text-[15px]">Get instant access to credit products tailored by AI. Quick approval &#8226; Transparent process &#8226; Better rates</p>
+            </div>
+
+            <div class="min-w-0 w-full flex-1 text-center md:text-right">
+                <div class="relative mx-auto flex h-[220px] w-full max-w-[360px] items-center justify-center overflow-hidden rounded-2xl bg-white p-0 shadow-lg md:mr-0 md:h-[260px] md:max-w-[420px]">
+                    <img src="./personal loan (1).png" alt="Personal loan" class="hero-slide hero-slide--wide active absolute inset-0 h-full w-full">
+                    <img src="./home loan.png" alt="Home loan" class="hero-slide hero-slide--wide absolute inset-0 h-full w-full">
+                    <img src="./gold loan.png" alt="Gold loan" class="hero-slide hero-slide--wide absolute inset-0 h-full w-full">
+                    <img src="./cbil score.jpg" alt="CBIL score" class="hero-slide hero-slide--standard absolute inset-0 h-full w-full">
+                </div>
+                <div class="mt-4 flex justify-center gap-2">
                     <div class="dot active h-2 w-6 cursor-pointer rounded bg-white transition-all duration-300"></div>
                     <div class="dot h-2 w-2 cursor-pointer rounded-full bg-white/50 transition-all duration-300"></div>
                     <div class="dot h-2 w-2 cursor-pointer rounded-full bg-white/50 transition-all duration-300"></div>
                     <div class="dot h-2 w-2 cursor-pointer rounded-full bg-white/50 transition-all duration-300"></div>
-                </div>
-            </div>
-
-            <div class="min-w-0 flex-1 text-center md:text-right">
-                <div class="mx-auto flex h-[200px] w-full max-w-[300px] items-center justify-center rounded-xl bg-gradient-to-br from-white/20 to-white/10 text-sm text-white md:mr-0">
-                    &#129302; AI Credit Assistant
                 </div>
             </div>
         </div>
@@ -128,8 +307,8 @@
         <section class="mb-[30px] md:mb-10">
             <h2 class="mb-4 flex items-center gap-2.5 text-sm font-bold uppercase tracking-[0.5px] text-textDark sm:mb-5 sm:text-base before:h-4 before:w-1 before:rounded before:bg-secondaryOrange before:content-['']">Loans</h2>
 
-            <div class="grid grid-cols-[repeat(auto-fit,minmax(100px,1fr))] gap-2.5 sm:grid-cols-[repeat(auto-fit,minmax(120px,1fr))] sm:gap-3 md:grid-cols-[repeat(auto-fit,minmax(140px,1fr))] md:gap-4">
-                <div class="product-tile relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5">
+            <div class="grid grid-cols-2 gap-3 sm:grid-cols-[repeat(auto-fit,minmax(120px,1fr))] sm:gap-3 md:grid-cols-[repeat(auto-fit,minmax(140px,1fr))] md:gap-4">
+                <div class="product-tile product-tile--shiny relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5">
                     <span class="mb-2 block text-[28px] sm:text-[32px] md:mb-3 md:text-[40px]">&#128179;</span>
                     <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Personal Loan</span>
                     <span class="mt-2 inline-block rounded-xl bg-greenAccent px-1.5 py-[3px] text-[9px] font-bold uppercase tracking-[0.5px] text-white sm:px-2 sm:py-1 sm:text-[10px]">Popular</span>
@@ -138,19 +317,19 @@
                 <div class="product-tile relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5">
                     <span class="mb-2 block text-[28px] sm:text-[32px] md:mb-3 md:text-[40px]">&#127919;</span>
                     <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Gold Loan</span>
-                    <span class="mt-2 inline-block rounded-xl bg-greenAccent px-1.5 py-[3px] text-[9px] font-bold uppercase tracking-[0.5px] text-white sm:px-2 sm:py-1 sm:text-[10px]">Coming Soon</span>
+                    <span class="coming-soon-corner">Coming Soon</span>
                 </div>
 
                 <div class="product-tile relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5">
                     <span class="mb-2 block text-[28px] sm:text-[32px] md:mb-3 md:text-[40px]">&#127970;</span>
                     <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Business Loans</span>
-                    <span class="mt-2 inline-block rounded-xl bg-greenAccent px-1.5 py-[3px] text-[9px] font-bold uppercase tracking-[0.5px] text-white sm:px-2 sm:py-1 sm:text-[10px]">Coming Soon</span>
+                    <span class="coming-soon-corner">Coming Soon</span>
                 </div>
 
                 <div class="product-tile relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5">
                     <span class="mb-2 block text-[28px] sm:text-[32px] md:mb-3 md:text-[40px]">&#127968;</span>
                     <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Home Loan</span>
-                    <span class="mt-2 inline-block rounded-xl bg-greenAccent px-1.5 py-[3px] text-[9px] font-bold uppercase tracking-[0.5px] text-white sm:px-2 sm:py-1 sm:text-[10px]">Coming Soon</span>
+                    <span class="coming-soon-corner">Coming Soon</span>
                 </div>
             </div>
         </section>
@@ -158,7 +337,7 @@
         <section class="mb-[30px] md:mb-10">
             <h2 class="mb-4 flex items-center gap-2.5 text-sm font-bold uppercase tracking-[0.5px] text-textDark sm:mb-5 sm:text-base before:h-4 before:w-1 before:rounded before:bg-secondaryOrange before:content-['']">Credit Score & Emi Calculator</h2>
 
-            <div class="grid grid-cols-[repeat(auto-fit,minmax(100px,1fr))] gap-2.5 sm:grid-cols-[repeat(auto-fit,minmax(120px,1fr))] sm:gap-3 md:grid-cols-[repeat(auto-fit,minmax(140px,1fr))] md:gap-4">
+            <div class="grid grid-cols-2 gap-3 sm:grid-cols-[repeat(auto-fit,minmax(120px,1fr))] sm:gap-3 md:grid-cols-[repeat(auto-fit,minmax(140px,1fr))] md:gap-4">
                 <div class="product-tile relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5">
                     <span class="mb-2 block text-[28px] sm:text-[32px] md:mb-3 md:text-[40px]">&#128202;</span>
                     <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Credit Score</span>
@@ -169,9 +348,59 @@
                     <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Free Credit Score Checker</span>
                 </div>
 
-                <div class="product-tile relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5">
+                <div class="product-tile relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5" data-action="open-emi-calculator">
                     <span class="mb-2 block text-[28px] sm:text-[32px] md:mb-3 md:text-[40px]">&#128241;</span>
                     <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Emi Calculator</span>
+                </div>
+            </div>
+
+            <div id="emi-calculator-panel" class="emi-calculator-panel">
+                <div class="mx-auto max-w-[420px] rounded-[28px] border border-primaryBlue/10 bg-gradient-to-br from-white via-[#f9fbff] to-[#edf4ff] p-5 shadow-[0_20px_50px_rgba(66,115,190,0.18)] md:p-8">
+                    <div class="mb-6 flex items-start justify-between gap-4">
+                        <div>
+                            <h3 class="text-[28px] font-bold tracking-[-0.02em] text-[#17223d]">EMI Calculator</h3>
+                        </div>
+                        <button id="close-emi-panel" class="rounded-full bg-slate-100 px-3 py-1 text-sm font-semibold text-slate-500 transition hover:bg-slate-200 hover:text-slate-700">Hide</button>
+                    </div>
+
+                    <div class="space-y-7">
+                        <label class="block">
+                            <div class="mb-4 flex items-center justify-between gap-3">
+                                <span class="text-sm font-semibold text-slate-600 sm:text-[15px]">Loan Amount (&#8377;)</span>
+                                <span id="loan-amount-display" class="min-w-[90px] rounded-2xl bg-slate-100 px-4 py-3 text-center text-2xl font-bold text-[#17223d]">&#8377;5 L</span>
+                            </div>
+                            <input id="loan-amount" type="range" min="100000" max="5000000" step="50000" value="500000" class="emi-slider">
+                        </label>
+
+                        <label class="block">
+                            <div class="mb-4 flex items-center justify-between gap-3">
+                                <span class="text-sm font-semibold text-slate-600 sm:text-[15px]">Interest Rate (% p.a.)</span>
+                                <span id="interest-rate-display" class="min-w-[90px] rounded-2xl bg-slate-100 px-4 py-3 text-center text-2xl font-bold text-[#17223d]">10.5%</span>
+                            </div>
+                            <input id="interest-rate" type="range" min="1" max="24" step="0.1" value="10.5" class="emi-slider">
+                        </label>
+
+                        <label class="block">
+                            <div class="mb-4 flex items-center justify-between gap-3">
+                                <span class="text-sm font-semibold text-slate-600 sm:text-[15px]">Tenure (Months)</span>
+                                <span id="loan-tenure-display" class="min-w-[90px] rounded-2xl bg-slate-100 px-4 py-3 text-center text-2xl font-bold text-[#17223d]">60 M</span>
+                            </div>
+                            <input id="loan-tenure" type="range" min="6" max="360" step="6" value="60" class="emi-slider">
+                        </label>
+                    </div>
+
+                    <div class="mt-7 grid gap-4 border-t border-slate-200 pt-6 sm:grid-cols-2">
+                        <div class="rounded-[22px] bg-gradient-to-br from-[#edf4ff] to-[#dbe8fb] p-5 shadow-inner">
+                            <p class="text-sm font-medium text-slate-500">Monthly EMI</p>
+                            <p id="emi-result" class="mt-3 text-[24px] font-bold text-[#2f67e8]">&#8377;0</p>
+                        </div>
+                        <div class="rounded-[22px] bg-gradient-to-br from-[#edf4ff] to-[#dbe8fb] p-5 shadow-inner">
+                            <p class="text-sm font-medium text-slate-500">Total Amount Payable</p>
+                            <p id="total-result" class="mt-3 text-[24px] font-bold text-[#2f67e8]">&#8377;0</p>
+                        </div>
+                    </div>
+
+                    <p id="interest-result" class="mt-4 text-center text-sm font-medium text-slate-500">Total interest: &#8377;0</p>
                 </div>
             </div>
         </section>
@@ -180,28 +409,28 @@
             <h2 class="mb-4 flex items-center gap-2.5 text-sm font-bold uppercase tracking-[0.5px] text-textDark sm:mb-5 sm:text-base before:h-4 before:w-1 before:rounded before:bg-secondaryOrange before:content-['']">Basic AI Products Your Team Can Launch Fast</h2>
 
             <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-                <div class="rounded-2xl border border-borderLight bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile">
+                <div class="glass-card rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile">
                     <div class="mb-3 text-3xl">&#129504;</div>
                     <h3 class="mb-2 text-lg font-bold text-textDark">AI Credit Scoring</h3>
                     <p class="mb-4 text-sm leading-6 text-textGray">Predict borrower strength using transaction, bureau, and behavior data.</p>
                     <div class="inline-flex rounded-full bg-primaryBlue/10 px-3 py-1 text-xs font-semibold text-primaryBlue">Risk insights</div>
                 </div>
 
-                <div class="rounded-2xl border border-borderLight bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile">
+                <div class="glass-card rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile">
                     <div class="mb-3 text-3xl">&#128202;</div>
                     <h3 class="mb-2 text-lg font-bold text-textDark">Loan Eligibility Checker</h3>
                     <p class="mb-4 text-sm leading-6 text-textGray">Instantly estimate approval chances and suggest loan ranges.</p>
                     <div class="inline-flex rounded-full bg-secondaryOrange/15 px-3 py-1 text-xs font-semibold text-[#B96D00]">Instant decisions</div>
                 </div>
 
-                <div class="rounded-2xl border border-borderLight bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile">
+                <div class="glass-card rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile">
                     <div class="mb-3 text-3xl">&#128737;</div>
                     <h3 class="mb-2 text-lg font-bold text-textDark">Fraud Detection Monitor</h3>
                     <p class="mb-4 text-sm leading-6 text-textGray">Flag suspicious applications with anomaly and pattern detection.</p>
                     <div class="inline-flex rounded-full bg-red-50 px-3 py-1 text-xs font-semibold text-red-600">Live alerts</div>
                 </div>
 
-                <div class="rounded-2xl border border-borderLight bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile">
+                <div class="glass-card rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile">
                     <div class="mb-3 text-3xl">&#128196;</div>
                     <h3 class="mb-2 text-lg font-bold text-textDark">Smart Document Parser</h3>
                     <p class="mb-4 text-sm leading-6 text-textGray">Extract PAN, Aadhaar, salary, and bank details from uploaded files.</p>
@@ -217,7 +446,7 @@
             </div>
 
             <div class="grid gap-6 lg:grid-cols-2">
-                <div class="rounded-2xl border border-borderLight bg-white p-6">
+                <div class="glass-card rounded-2xl p-6">
                     <h3 class="mb-3 text-xl font-bold text-textDark">Leading Fintech Innovators</h3>
                     <p class="mb-5 text-sm leading-7 text-textGray">CreditgenAI is revolutionizing the lending landscape with cutting-edge AI technology. We're committed to making loans accessible, fast, and transparent for everyone.</p>
                     <div class="space-y-3 text-sm text-textDark">
@@ -227,7 +456,7 @@
                     </div>
                 </div>
 
-                <div class="rounded-2xl border border-borderLight bg-white p-6">
+                <div class="glass-card rounded-2xl p-6">
                     <h3 class="mb-3 text-xl font-bold text-textDark">Our Values</h3>
                     <p class="mb-5 text-sm leading-7 text-textGray">Trust & Transparency</p>
                     <p class="mb-5 text-sm leading-7 text-textGray">We believe in complete transparency and putting our customers first. Every decision we make is guided by our core values of integrity, innovation, and inclusion.</p>
@@ -274,7 +503,7 @@
 
     <footer class="mt-[60px] bg-textDark px-4 py-10 text-white">
         <div class="mx-auto max-w-[1400px]">
-            <div class="mb-[30px] grid grid-cols-2 gap-5 sm:grid-cols-[repeat(auto-fit,minmax(180px,1fr))] sm:gap-[30px]">
+            <div class="mb-[30px] grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-[24px] lg:grid-cols-4 lg:gap-[30px]">
                 <div>
                     <h4 class="mb-4 text-sm font-semibold">About Us</h4>
                     <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">Who We Are</a>
@@ -317,14 +546,86 @@
     </div>
 
     <script>
-        let isMobile = window.innerWidth <= 480;
-
-        window.addEventListener('resize', () => {
-            isMobile = window.innerWidth <= 480;
-        });
-
         const dots = document.querySelectorAll('.dot');
+        const heroSlides = document.querySelectorAll('.hero-slide');
+        const mobileMenuButton = document.querySelector('#mobile-menu-button');
+        const mobileNav = document.querySelector('#mobile-nav');
+        const emiCalculatorTrigger = document.querySelector('[data-action="open-emi-calculator"]');
+        const emiCalculatorPanel = document.querySelector('#emi-calculator-panel');
+        const closeEmiPanelButton = document.querySelector('#close-emi-panel');
+        const loanAmountInput = document.querySelector('#loan-amount');
+        const interestRateInput = document.querySelector('#interest-rate');
+        const loanTenureInput = document.querySelector('#loan-tenure');
+        const loanAmountDisplay = document.querySelector('#loan-amount-display');
+        const interestRateDisplay = document.querySelector('#interest-rate-display');
+        const loanTenureDisplay = document.querySelector('#loan-tenure-display');
+        const emiResult = document.querySelector('#emi-result');
+        const interestResult = document.querySelector('#interest-result');
+        const totalResult = document.querySelector('#total-result');
         let currentSlide = 0;
+
+        function formatCurrency(value) {
+            return `\u20B9${Math.round(value).toLocaleString('en-IN')}`;
+        }
+
+        function formatLakhDisplay(value) {
+            const lakhs = value / 100000;
+            return Number.isInteger(lakhs) ? `\u20B9${lakhs} L` : `\u20B9${lakhs.toFixed(1)} L`;
+        }
+
+        function updateSliderFill(input) {
+            if (!input) {
+                return;
+            }
+
+            const min = Number(input.min || 0);
+            const max = Number(input.max || 100);
+            const value = Number(input.value || 0);
+            const percentage = ((value - min) / (max - min)) * 100;
+            input.style.background = `linear-gradient(90deg, #2f67e8 0%, #2f67e8 ${percentage}%, #dfe6f2 ${percentage}%, #dfe6f2 100%)`;
+        }
+
+        function updateEmiDisplays() {
+            if (loanAmountDisplay && loanAmountInput) {
+                loanAmountDisplay.textContent = formatLakhDisplay(Number(loanAmountInput.value));
+                updateSliderFill(loanAmountInput);
+            }
+
+            if (interestRateDisplay && interestRateInput) {
+                interestRateDisplay.textContent = `${Number(interestRateInput.value).toFixed(1)}%`;
+                updateSliderFill(interestRateInput);
+            }
+
+            if (loanTenureDisplay && loanTenureInput) {
+                loanTenureDisplay.textContent = `${loanTenureInput.value} M`;
+                updateSliderFill(loanTenureInput);
+            }
+        }
+
+        function computeEmi() {
+            const principal = Number(loanAmountInput?.value || 0);
+            const annualRate = Number(interestRateInput?.value || 0);
+            const months = Number(loanTenureInput?.value || 0);
+            updateEmiDisplays();
+
+            if (!principal || !months || principal < 0 || months <= 0 || annualRate < 0) {
+                emiResult.textContent = '\u20B90';
+                interestResult.textContent = 'Total interest: \u20B90';
+                totalResult.textContent = '\u20B90';
+                return;
+            }
+
+            const monthlyRate = annualRate / 12 / 100;
+            const emi = monthlyRate === 0
+                ? principal / months
+                : (principal * monthlyRate * ((1 + monthlyRate) ** months)) / ((((1 + monthlyRate) ** months) - 1));
+            const totalPayment = emi * months;
+            const totalInterest = totalPayment - principal;
+
+            emiResult.textContent = formatCurrency(emi);
+            interestResult.textContent = `Total interest: ${formatCurrency(totalInterest)}`;
+            totalResult.textContent = formatCurrency(totalPayment);
+        }
 
         function updateDots() {
             dots.forEach((dot, index) => {
@@ -337,6 +638,10 @@
                 dot.classList.toggle('rounded-full', !active);
                 dot.classList.toggle('bg-white/50', !active);
             });
+
+            heroSlides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
         }
 
         dots.forEach((dot, index) => {
@@ -344,6 +649,42 @@
                 currentSlide = index;
                 updateDots();
             });
+        });
+
+        if (mobileMenuButton && mobileNav) {
+            mobileMenuButton.addEventListener('click', () => {
+                const isOpen = mobileNav.classList.toggle('is-open');
+                mobileMenuButton.setAttribute('aria-expanded', String(isOpen));
+            });
+
+            mobileNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileNav.classList.remove('is-open');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                });
+            });
+        }
+
+        if (emiCalculatorTrigger && emiCalculatorPanel) {
+            emiCalculatorTrigger.addEventListener('click', () => {
+                const isOpen = emiCalculatorPanel.classList.toggle('is-open');
+                if (isOpen) {
+                    computeEmi();
+                    emiCalculatorPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        }
+
+        if (closeEmiPanelButton && emiCalculatorPanel) {
+            closeEmiPanelButton.addEventListener('click', () => {
+                emiCalculatorPanel.classList.remove('is-open');
+            });
+        }
+
+        [loanAmountInput, interestRateInput, loanTenureInput].forEach(input => {
+            if (input) {
+                input.addEventListener('input', computeEmi);
+            }
         });
 
         setInterval(() => {
@@ -358,9 +699,14 @@
             });
         });
 
-        document.querySelector('.btn-apply-now').addEventListener('click', function() {
-            alert('Redirecting to Personal Loan Application...');
-        });
+        const applyNowButton = document.querySelector('.btn-apply-now');
+        if (applyNowButton) {
+            applyNowButton.addEventListener('click', function() {
+                alert('Redirecting to Personal Loan Application...');
+            });
+        }
+
+        computeEmi();
     </script>
 </body>
 </html>
