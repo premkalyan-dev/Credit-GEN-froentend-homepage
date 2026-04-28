@@ -1,596 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paisabazaar - Personal Finance Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primaryBlue: '#004A9D',
+                        primaryLight: '#1E5AAE',
+                        secondaryOrange: '#F5A623',
+                        greenAccent: '#6BC34A',
+                        background: '#F8F9FA',
+                        textDark: '#1A1A1A',
+                        textGray: '#666666',
+                        borderLight: '#E8E8E8'
+                    },
+                    boxShadow: {
+                        header: '0 2px 8px rgba(0, 0, 0, 0.08)',
+                        headerBtn: '0 2px 8px rgba(0, 74, 157, 0.2)',
+                        headerBtnHover: '0 4px 12px rgba(0, 74, 157, 0.3)',
+                        cta: '0 4px 12px rgba(245, 166, 35, 0.3)',
+                        ctaHover: '0 6px 16px rgba(245, 166, 35, 0.4)',
+                        tile: '0 8px 20px rgba(0, 74, 157, 0.15)'
+                    }
+                }
+            }
+        };
+    </script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-blue: #004A9D;
-            --primary-light: #1E5AAE;
-            --secondary-orange: #F5A623;
-            --green-accent: #6BC34A;
-            --background: #F8F9FA;
-            --white: #FFFFFF;
-            --text-dark: #1A1A1A;
-            --text-gray: #666666;
-            --text-light: #999999;
-            --border-light: #E8E8E8;
-        }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--background);
-            color: var(--text-dark);
-            line-height: 1.5;
         }
 
-        /* ===== HEADER ===== */
-        header {
-            background: var(--white);
-            border-bottom: 1px solid var(--border-light);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-
-        .header-wrapper {
-            max-width: 100%;
-            padding: 0 1rem;
-        }
-
-        .header-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 65px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--primary-blue);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            min-width: fit-content;
-        }
-
-        .logo-dot {
-            font-size: 24px;
-            color: var(--primary-blue);
-        }
-
-        .logo span {
-            color: var(--primary-blue);
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 32px;
-            align-items: center;
-            flex: 1;
-            margin: 0 40px;
-        }
-
-        .nav-menu a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            font-size: 14px;
-            transition: color 0.3s;
-            position: relative;
-        }
-
-        .nav-menu a:hover {
-            color: var(--primary-blue);
-        }
-
-        .nav-menu a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary-blue);
-            transition: width 0.3s;
-        }
-
-        .nav-menu a:hover::after {
-            width: 100%;
-        }
-
-        .header-buttons {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-
-        .btn-signin {
-            background: transparent;
-            border: none;
-            color: var(--text-dark);
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 14px;
-            transition: color 0.3s;
-        }
-
-        .btn-signin:hover {
-            color: var(--primary-blue);
-        }
-
-        .btn-apply-now-header {
-            background: var(--primary-blue);
-            color: white;
-            padding: 8px 20px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.3s;
-            box-shadow: 0 2px 8px rgba(0, 74, 157, 0.2);
-        }
-
-        .btn-apply-now-header:hover {
-            background: var(--primary-light);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 74, 157, 0.3);
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            font-size: 24px;
-        }
-
-        /* ===== HERO BANNER ===== */
-        .hero-banner {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-light) 100%);
-            padding: 30px 1rem;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 30px;
-        }
-
-        .hero-left {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .hero-left h1 {
-            font-size: 32px;
-            margin-bottom: 12px;
-            font-weight: 700;
-            line-height: 1.3;
-        }
-
-        .hero-left p {
-            font-size: 15px;
-            opacity: 0.95;
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .btn-apply-now {
-            background: var(--secondary-orange);
-            color: white;
-            padding: 12px 28px;
-            border: none;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(245, 166, 35, 0.3);
-        }
-
-        .btn-apply-now:hover {
-            background: #E8941A;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(245, 166, 35, 0.4);
-        }
-
-        .hero-right {
-            flex: 1;
-            text-align: right;
-            min-width: 0;
-        }
-
-        .hero-right img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* ===== CAROUSEL DOTS ===== */
-        .carousel-dots {
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-            margin-top: 16px;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .dot.active {
-            background: white;
-            width: 24px;
-            border-radius: 4px;
-        }
-
-        /* ===== MAIN CONTENT ===== */
-        .main-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 30px 1rem;
-        }
-
-        /* ===== SECTION: LOANS AND CARDS ===== */
-        .section {
-            margin-bottom: 40px;
-        }
-
-        .section-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-title::before {
-            content: '';
-            width: 4px;
-            height: 16px;
-            background: var(--secondary-orange);
-            border-radius: 2px;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 16px;
-        }
-
-        .product-tile {
-            background: var(--white);
-            border: 1px solid var(--border-light);
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 160px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .product-tile::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--green-accent) 0%, var(--secondary-orange) 100%);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s;
-        }
-
-        .product-tile:hover {
-            border-color: var(--primary-blue);
-            box-shadow: 0 8px 20px rgba(0, 74, 157, 0.15);
-            transform: translateY(-4px);
-        }
-
-        .product-tile:hover::before {
-            transform: scaleX(1);
-        }
-
-        .product-icon {
-            font-size: 40px;
-            margin-bottom: 12px;
-            display: block;
-        }
-
-        .product-label {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-dark);
-            line-height: 1.4;
-        }
-
-        .product-badge {
-            display: inline-block;
-            background: var(--green-accent);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: 700;
-            margin-top: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* ===== CREDIT SCORE SECTION ===== */
-        .credit-score-section {
-            background: linear-gradient(135deg, #FFF5E6 0%, #FFF9F0 100%);
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 30px;
-        }
-
-        .credit-score-header {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .info-icon {
-            width: 16px;
-            height: 16px;
-            border: 1px solid var(--text-gray);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            color: var(--text-gray);
-        }
-
-        /* ===== FOOTER ===== */
-        footer {
-            background: var(--text-dark);
-            color: white;
-            padding: 40px 1rem;
-            margin-top: 60px;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .footer-section h4 {
-            margin-bottom: 16px;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .footer-section a {
-            display: block;
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            font-size: 13px;
-            margin-bottom: 10px;
-            transition: color 0.3s;
-        }
-
-        .footer-section a:hover {
-            color: white;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 20px;
-            text-align: center;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        /* ===== MOBILE RESPONSIVE ===== */
-        @media (max-width: 768px) {
-            .header-top {
-                height: 55px;
-            }
-
-            .logo {
-                font-size: 16px;
-            }
-
-            .nav-menu {
-                display: none;
-            }
-
-            .header-buttons {
-                gap: 8px;
-            }
-
-            .btn-signin,
-            .btn-apply-now-header {
-                font-size: 12px;
-            }
-
-            .btn-apply-now-header {
-                padding: 8px 16px;
-            }
-
-            .hero-content {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .hero-left h1 {
-                font-size: 24px;
-            }
-
-            .hero-left p {
-                font-size: 14px;
-            }
-
-            .hero-right {
-                text-align: center;
-            }
-
-            .products-grid {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-                gap: 12px;
-            }
-
-            .product-tile {
-                padding: 16px;
-                min-height: 140px;
-            }
-
-            .product-icon {
-                font-size: 32px;
-                margin-bottom: 8px;
-            }
-
-            .product-label {
-                font-size: 12px;
-            }
-
-            .main-content {
-                padding: 20px 1rem;
-            }
-
-            .section {
-                margin-bottom: 30px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header-top {
-                height: 50px;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
-            .logo {
-                font-size: 14px;
-            }
-
-            .nav-menu {
-                display: none;
-            }
-
-            .btn-signin {
-                display: none;
-            }
-
-            .btn-apply-now-header {
-                padding: 8px 12px;
-                font-size: 12px;
-            }
-
-            .hero-banner {
-                padding: 20px 1rem;
-            }
-
-            .hero-left h1 {
-                font-size: 20px;
-                margin-bottom: 10px;
-            }
-
-            .hero-left p {
-                font-size: 13px;
-                margin-bottom: 16px;
-            }
-
-            .btn-apply-now {
-                padding: 10px 20px;
-                font-size: 13px;
-                width: 100%;
-            }
-
-            .products-grid {
-                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-                gap: 10px;
-            }
-
-            .product-tile {
-                padding: 14px;
-                min-height: 130px;
-            }
-
-            .product-icon {
-                font-size: 28px;
-            }
-
-            .product-label {
-                font-size: 11px;
-            }
-
-            .product-badge {
-                font-size: 9px;
-                padding: 3px 6px;
-            }
-
-            .section-title {
-                font-size: 14px;
-                margin-bottom: 16px;
-            }
-
-            .footer-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-        }
-
-        /* ===== ANIMATIONS ===== */
         @keyframes slideIn {
             from {
                 opacity: 0;
@@ -606,6 +51,23 @@
             animation: slideIn 0.5s ease-out forwards;
         }
 
+        .product-tile::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #6BC34A 0%, #F5A623 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+        }
+
+        .product-tile:hover::before {
+            transform: scaleX(1);
+        }
+
         .product-tile:nth-child(1) { animation-delay: 0.05s; }
         .product-tile:nth-child(2) { animation-delay: 0.1s; }
         .product-tile:nth-child(3) { animation-delay: 0.15s; }
@@ -616,157 +78,264 @@
         .product-tile:nth-child(8) { animation-delay: 0.4s; }
     </style>
 </head>
-<body>
-    <!-- HEADER -->
-    <header>
-        <div class="header-wrapper">
-            <div class="header-top">
-                <a href="#" class="logo">
-                    <span class="logo-dot">●</span> <span>CreditGenAI</span>
+<body class="bg-[#e9eef5] p-2 text-textDark leading-6 sm:p-3">
+    <div class="min-h-screen overflow-hidden rounded-[24px] border border-borderLight bg-background">
+    <header class="sticky top-0 z-[1000] border-b border-borderLight bg-white shadow-header">
+        <div class="max-w-full px-4">
+            <div class="mx-auto flex h-[50px] max-w-[1400px] items-center justify-between sm:h-[55px] md:h-[65px]">
+                <a href="#" class="flex min-w-fit items-center gap-2 text-sm font-bold text-primaryBlue no-underline sm:text-base md:text-[20px]">
+                    <span class="text-[20px] text-primaryBlue sm:text-[22px] md:text-[24px]">&#9679;</span>
+                    <span>CreditGenAI</span>
                 </a>
-                <nav class="nav-menu">
-                    <a href="#">Products</a>
-                    <a href="#">About</a>
-                    <a href="#">Mission & Vision</a>
+
+                <nav class="mx-10 hidden flex-1 items-center gap-8 md:flex">
+                    <a href="#products" class="relative text-sm font-medium text-textDark transition-colors duration-300 after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-primaryBlue after:transition-all after:duration-300 hover:text-primaryBlue hover:after:w-full">Products</a>
+                    <a href="#about" class="relative text-sm font-medium text-textDark transition-colors duration-300 after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-primaryBlue after:transition-all after:duration-300 hover:text-primaryBlue hover:after:w-full">About</a>
+                    <a href="#mission-vision" class="relative text-sm font-medium text-textDark transition-colors duration-300 after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-primaryBlue after:transition-all after:duration-300 hover:text-primaryBlue hover:after:w-full">Mission & Vision</a>
                 </nav>
-                <div class="header-buttons">
-                    <button class="btn-signin">Log in</button>
-                    <button class="btn-apply-now-header">Get Started</button>
+
+                <div class="flex items-center gap-2 sm:gap-2 md:gap-3">
+                    <button class="rounded-md border-none bg-primaryBlue px-3 py-2 text-xs font-semibold text-white shadow-headerBtn transition-all duration-300 hover:-translate-y-0.5 hover:bg-primaryLight hover:shadow-headerBtnHover sm:px-4 md:px-5 md:text-sm">SIGN IN</button>
                 </div>
-                <button class="hamburger">☰</button>
+
+                <button class="text-2xl md:hidden">&#9776;</button>
             </div>
         </div>
     </header>
 
-    <!-- HERO BANNER -->
-    <section class="hero-banner">
-        <div class="hero-content">
-            <div class="hero-left">
-                <h1>AI-Powered Credit Solutions for Everyone</h1>
-                <p>Get instant access to credit products tailored by AI. Quick approval • Transparent process • Better rates</p>
-                <div class="hero-cta">
-                    <button class="btn-apply-now">Get Started →</button>
-                </div>
-                <div class="carousel-dots">
-                    <div class="dot active"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
+    <section class="overflow-hidden bg-gradient-to-br from-primaryBlue to-primaryLight px-4 py-5 text-white sm:py-[30px]">
+        <div class="mx-auto flex max-w-[1400px] flex-col items-center justify-between gap-5 md:flex-row md:gap-[30px]">
+            <div class="min-w-0 flex-1">
+                <h1 class="mb-[10px] text-[20px] font-bold leading-[1.3] sm:mb-3 sm:text-2xl md:text-[32px]">AI-Powered Credit Solutions for Everyone</h1>
+                <p class="mb-4 text-[13px] leading-[1.5] opacity-95 sm:mb-5 sm:text-sm md:text-[15px]">Get instant access to credit products tailored by AI. Quick approval &#8226; Transparent process &#8226; Better rates</p>
+                <div class="mt-4 flex justify-center gap-2 md:justify-start">
+                    <div class="dot active h-2 w-6 cursor-pointer rounded bg-white transition-all duration-300"></div>
+                    <div class="dot h-2 w-2 cursor-pointer rounded-full bg-white/50 transition-all duration-300"></div>
+                    <div class="dot h-2 w-2 cursor-pointer rounded-full bg-white/50 transition-all duration-300"></div>
+                    <div class="dot h-2 w-2 cursor-pointer rounded-full bg-white/50 transition-all duration-300"></div>
                 </div>
             </div>
-            <div class="hero-right">
-                <!-- Banner Image Placeholder -->
-                <div style="background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%); width: 300px; height: 200px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px;">
-                    🤖 AI Credit Assistant
+
+            <div class="min-w-0 flex-1 text-center md:text-right">
+                <div class="mx-auto flex h-[200px] w-full max-w-[300px] items-center justify-center rounded-xl bg-gradient-to-br from-white/20 to-white/10 text-sm text-white md:mr-0">
+                    &#129302; AI Credit Assistant
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- MAIN CONTENT -->
-    <div class="main-content">
-        <!-- LOANS AND CARDS SECTION -->
-        <section class="section">
-            <h2 class="section-title">Loans</h2>
-            <div class="products-grid">
-                <div class="product-tile">
-                    <span class="product-icon">💳</span>
-                    <span class="product-label">Personal Loan</span>
-                    <span class="product-badge">Popular</span>
+    <div class="mx-auto max-w-[1400px] px-4 py-5 sm:py-[30px]">
+        <section class="mb-[30px] md:mb-10">
+            <h2 class="mb-4 flex items-center gap-2.5 text-sm font-bold uppercase tracking-[0.5px] text-textDark sm:mb-5 sm:text-base before:h-4 before:w-1 before:rounded before:bg-secondaryOrange before:content-['']">Loans</h2>
+
+            <div class="grid grid-cols-[repeat(auto-fit,minmax(100px,1fr))] gap-2.5 sm:grid-cols-[repeat(auto-fit,minmax(120px,1fr))] sm:gap-3 md:grid-cols-[repeat(auto-fit,minmax(140px,1fr))] md:gap-4">
+                <div class="product-tile relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5">
+                    <span class="mb-2 block text-[28px] sm:text-[32px] md:mb-3 md:text-[40px]">&#128179;</span>
+                    <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Personal Loan</span>
+                    <span class="mt-2 inline-block rounded-xl bg-greenAccent px-1.5 py-[3px] text-[9px] font-bold uppercase tracking-[0.5px] text-white sm:px-2 sm:py-1 sm:text-[10px]">Popular</span>
                 </div>
-                <div class="product-tile">
-                    <span class="product-icon">🎫</span>
-                    <span class="product-label">Gold Loan</span>
-                    <span class="product-badge">Coming Soon</span>
+
+                <div class="product-tile relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5">
+                    <span class="mb-2 block text-[28px] sm:text-[32px] md:mb-3 md:text-[40px]">&#127919;</span>
+                    <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Gold Loan</span>
+                    <span class="mt-2 inline-block rounded-xl bg-greenAccent px-1.5 py-[3px] text-[9px] font-bold uppercase tracking-[0.5px] text-white sm:px-2 sm:py-1 sm:text-[10px]">Coming Soon</span>
                 </div>
-                <div class="product-tile">
-                    <span class="product-icon">🏢</span>
-                    <span class="product-label">Business Loans</span>
-                    <span class="product-badge">Coming Soon</span>
+
+                <div class="product-tile relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5">
+                    <span class="mb-2 block text-[28px] sm:text-[32px] md:mb-3 md:text-[40px]">&#127970;</span>
+                    <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Business Loans</span>
+                    <span class="mt-2 inline-block rounded-xl bg-greenAccent px-1.5 py-[3px] text-[9px] font-bold uppercase tracking-[0.5px] text-white sm:px-2 sm:py-1 sm:text-[10px]">Coming Soon</span>
                 </div>
-                <div class="product-tile">
-                    <span class="product-icon">🏠</span>
-                    <span class="product-label">Home Loan</span>
-                    <span class="product-badge">Coming Soon</span>
+
+                <div class="product-tile relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5">
+                    <span class="mb-2 block text-[28px] sm:text-[32px] md:mb-3 md:text-[40px]">&#127968;</span>
+                    <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Home Loan</span>
+                    <span class="mt-2 inline-block rounded-xl bg-greenAccent px-1.5 py-[3px] text-[9px] font-bold uppercase tracking-[0.5px] text-white sm:px-2 sm:py-1 sm:text-[10px]">Coming Soon</span>
                 </div>
-                  
             </div>
         </section>
 
-        <!-- CREDIT SCORE & BILL PAYMENTS -->
-        <section class="section">
-            <h2 class="section-title">Credit Score & Emi Calculator</h2>
-            <div class="products-grid">
-                <div class="product-tile">
-                    <span class="product-icon">📊</span>
-                    <span class="product-label">Credit Score</span>
+        <section class="mb-[30px] md:mb-10">
+            <h2 class="mb-4 flex items-center gap-2.5 text-sm font-bold uppercase tracking-[0.5px] text-textDark sm:mb-5 sm:text-base before:h-4 before:w-1 before:rounded before:bg-secondaryOrange before:content-['']">Credit Score & Emi Calculator</h2>
+
+            <div class="grid grid-cols-[repeat(auto-fit,minmax(100px,1fr))] gap-2.5 sm:grid-cols-[repeat(auto-fit,minmax(120px,1fr))] sm:gap-3 md:grid-cols-[repeat(auto-fit,minmax(140px,1fr))] md:gap-4">
+                <div class="product-tile relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5">
+                    <span class="mb-2 block text-[28px] sm:text-[32px] md:mb-3 md:text-[40px]">&#128202;</span>
+                    <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Credit Score</span>
                 </div>
-                 <div class="product-tile">
-                    <span class="product-icon">🗃️</span>
-                    <span class="product-label">Free Credit Score Checker</span>
+
+                <div class="product-tile relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5">
+                    <span class="mb-2 block text-[28px] sm:text-[32px] md:mb-3 md:text-[40px]">&#128451;&#65039;</span>
+                    <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Free Credit Score Checker</span>
                 </div>
-             <div class="product-tile">
-                    <span class="product-icon">📱</span>
-                    <span class="product-label">Emi Calculator</span>
+
+                <div class="product-tile relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5">
+                    <span class="mb-2 block text-[28px] sm:text-[32px] md:mb-3 md:text-[40px]">&#128241;</span>
+                    <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Emi Calculator</span>
                 </div>
+            </div>
+        </section>
+
+        <section id="products" class="mb-[30px] scroll-mt-24 md:mb-10">
+            <h2 class="mb-4 flex items-center gap-2.5 text-sm font-bold uppercase tracking-[0.5px] text-textDark sm:mb-5 sm:text-base before:h-4 before:w-1 before:rounded before:bg-secondaryOrange before:content-['']">Basic AI Products Your Team Can Launch Fast</h2>
+
+            <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+                <div class="rounded-2xl border border-borderLight bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile">
+                    <div class="mb-3 text-3xl">&#129504;</div>
+                    <h3 class="mb-2 text-lg font-bold text-textDark">AI Credit Scoring</h3>
+                    <p class="mb-4 text-sm leading-6 text-textGray">Predict borrower strength using transaction, bureau, and behavior data.</p>
+                    <div class="inline-flex rounded-full bg-primaryBlue/10 px-3 py-1 text-xs font-semibold text-primaryBlue">Risk insights</div>
+                </div>
+
+                <div class="rounded-2xl border border-borderLight bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile">
+                    <div class="mb-3 text-3xl">&#128202;</div>
+                    <h3 class="mb-2 text-lg font-bold text-textDark">Loan Eligibility Checker</h3>
+                    <p class="mb-4 text-sm leading-6 text-textGray">Instantly estimate approval chances and suggest loan ranges.</p>
+                    <div class="inline-flex rounded-full bg-secondaryOrange/15 px-3 py-1 text-xs font-semibold text-[#B96D00]">Instant decisions</div>
+                </div>
+
+                <div class="rounded-2xl border border-borderLight bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile">
+                    <div class="mb-3 text-3xl">&#128737;</div>
+                    <h3 class="mb-2 text-lg font-bold text-textDark">Fraud Detection Monitor</h3>
+                    <p class="mb-4 text-sm leading-6 text-textGray">Flag suspicious applications with anomaly and pattern detection.</p>
+                    <div class="inline-flex rounded-full bg-red-50 px-3 py-1 text-xs font-semibold text-red-600">Live alerts</div>
+                </div>
+
+                <div class="rounded-2xl border border-borderLight bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile">
+                    <div class="mb-3 text-3xl">&#128196;</div>
+                    <h3 class="mb-2 text-lg font-bold text-textDark">Smart Document Parser</h3>
+                    <p class="mb-4 text-sm leading-6 text-textGray">Extract PAN, Aadhaar, salary, and bank details from uploaded files.</p>
+                    <div class="inline-flex rounded-full bg-green-50 px-3 py-1 text-xs font-semibold text-green-700">Auto extraction</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="mb-[30px] scroll-mt-24 rounded-[24px] bg-gradient-to-br from-white to-[#eef4fb] p-6 md:mb-10 md:p-8">
+            <div class="mb-6">
+                <p class="mb-2 text-sm font-semibold uppercase tracking-[0.24em] text-primaryBlue">About CreditgenAI</p>
+                <h2 class="text-2xl font-bold text-textDark md:text-3xl">Who We Are</h2>
+            </div>
+
+            <div class="grid gap-6 lg:grid-cols-2">
+                <div class="rounded-2xl border border-borderLight bg-white p-6">
+                    <h3 class="mb-3 text-xl font-bold text-textDark">Leading Fintech Innovators</h3>
+                    <p class="mb-5 text-sm leading-7 text-textGray">CreditgenAI is revolutionizing the lending landscape with cutting-edge AI technology. We're committed to making loans accessible, fast, and transparent for everyone.</p>
+                    <div class="space-y-3 text-sm text-textDark">
+                        <div class="flex items-start gap-3"><span class="mt-0.5 text-greenAccent">&#10003;</span><span>Industry-leading approval rates</span></div>
+                        <div class="flex items-start gap-3"><span class="mt-0.5 text-greenAccent">&#10003;</span><span>24/7 customer support available</span></div>
+                        <div class="flex items-start gap-3"><span class="mt-0.5 text-greenAccent">&#10003;</span><span>Secure and encrypted transactions</span></div>
+                    </div>
+                </div>
+
+                <div class="rounded-2xl border border-borderLight bg-white p-6">
+                    <h3 class="mb-3 text-xl font-bold text-textDark">Our Values</h3>
+                    <p class="mb-5 text-sm leading-7 text-textGray">Trust & Transparency</p>
+                    <p class="mb-5 text-sm leading-7 text-textGray">We believe in complete transparency and putting our customers first. Every decision we make is guided by our core values of integrity, innovation, and inclusion.</p>
+                    <div class="space-y-3 text-sm text-textDark">
+                        <div class="flex items-start gap-3"><span class="mt-0.5 text-greenAccent">&#10003;</span><span>Complete price transparency</span></div>
+                        <div class="flex items-start gap-3"><span class="mt-0.5 text-greenAccent">&#10003;</span><span>Customer-centric approach</span></div>
+                        <div class="flex items-start gap-3"><span class="mt-0.5 text-greenAccent">&#10003;</span><span>Continuous technology upgrades</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mission-vision" class="mb-[30px] scroll-mt-24 md:mb-10">
+            <div class="mb-6">
+                <p class="mb-2 text-sm font-semibold uppercase tracking-[0.24em] text-primaryBlue">Our Mission & Vision</p>
+                <h2 class="text-2xl font-bold text-textDark md:text-3xl">Building Intelligent Financial Access</h2>
+            </div>
+
+            <div class="grid gap-6 lg:grid-cols-2">
+                <div class="rounded-2xl bg-primaryBlue p-6 text-white md:p-8">
+                    <h3 class="mb-3 text-xl font-bold">Our Mission</h3>
+                    <p class="mb-4 text-lg font-semibold text-white/90">Empower Financial Freedom</p>
+                    <p class="mb-5 text-sm leading-7 text-white/85">To empower individuals and businesses with accessible, transparent, and intelligent financial solutions. We leverage cutting-edge AI technology to deliver personalized loan experiences that transform dreams into reality.</p>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex items-start gap-3"><span class="mt-0.5 text-secondaryOrange">&#10003;</span><span>Transparent pricing with zero hidden charges</span></div>
+                        <div class="flex items-start gap-3"><span class="mt-0.5 text-secondaryOrange">&#10003;</span><span>AI-powered instant approval process</span></div>
+                        <div class="flex items-start gap-3"><span class="mt-0.5 text-secondaryOrange">&#10003;</span><span>Competitive interest rates and flexible terms</span></div>
+                    </div>
+                </div>
+
+                <div class="rounded-2xl bg-[#0f2039] p-6 text-white md:p-8">
+                    <h3 class="mb-3 text-xl font-bold">Our Vision</h3>
+                    <p class="mb-4 text-lg font-semibold text-white/90">Revolutionize Financial Services</p>
+                    <p class="mb-5 text-sm leading-7 text-white/85">To be the most trusted and innovative fintech platform in Asia, revolutionizing the lending industry through artificial intelligence. We envision a future where financial empowerment is instant and affordable for everyone.</p>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex items-start gap-3"><span class="mt-0.5 text-secondaryOrange">&#10003;</span><span>Serving millions across Asia by 2030</span></div>
+                        <div class="flex items-start gap-3"><span class="mt-0.5 text-secondaryOrange">&#10003;</span><span>Continuous AI innovation and improvement</span></div>
+                        <div class="flex items-start gap-3"><span class="mt-0.5 text-secondaryOrange">&#10003;</span><span>Financial inclusion for underbanked communities</span></div>
+                    </div>
+                </div>
+            </div>
         </section>
     </div>
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-grid">
-                <div class="footer-section">
-                    <h4>About Us</h4>
-                    <a href="#">Who We Are</a>
-                    <a href="#">Careers</a>
-                    <a href="#">Blogs</a>
-                    <a href="#">Press</a>
+    <footer class="mt-[60px] bg-textDark px-4 py-10 text-white">
+        <div class="mx-auto max-w-[1400px]">
+            <div class="mb-[30px] grid grid-cols-2 gap-5 sm:grid-cols-[repeat(auto-fit,minmax(180px,1fr))] sm:gap-[30px]">
+                <div>
+                    <h4 class="mb-4 text-sm font-semibold">About Us</h4>
+                    <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">Who We Are</a>
+                    <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">Careers</a>
+                    <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">Blogs</a>
+                    <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">Press</a>
                 </div>
-                <div class="footer-section">
-                    <h4>Products</h4>
-                    <a href="#">Personal Loans</a>
-                    <a href="#">Home Loans</a>
-                    <a href="#">Credit Cards</a>
-                    <a href="#">Insurance</a>
+
+                <div>
+                    <h4 class="mb-4 text-sm font-semibold">Products</h4>
+                    <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">Personal Loans</a>
+                    <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">Home Loans</a>
+                    <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">Credit Cards</a>
+                    <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">Insurance</a>
                 </div>
-                <div class="footer-section">
-                    <h4>Support</h4>
-                    <a href="#">Contact Us</a>
-                    <a href="#">FAQs</a>
-                    <a href="#">Grievance</a>
-                    <a href="#">Security</a>
+
+                <div>
+                    <h4 class="mb-4 text-sm font-semibold">Support</h4>
+                    <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">Contact Us</a>
+                    <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">FAQs</a>
+                    <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">Grievance</a>
+                    <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">Security</a>
                 </div>
-                <div class="footer-section">
-                    <h4>Legal</h4>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms & Conditions</a>
-                    <a href="#">Disclaimer</a>
-                    <a href="#">Sitemap</a>
+
+                <div>
+                    <h4 class="mb-4 text-sm font-semibold">Legal</h4>
+                    <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">Privacy Policy</a>
+                    <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">Terms & Conditions</a>
+                    <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">Disclaimer</a>
+                    <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">Sitemap</a>
                 </div>
             </div>
-            <div class="footer-bottom">
+
+            <div class="border-t border-white/10 pt-5 text-center text-[13px] text-white/70">
                 <p>&copy; 2024 CreditGenAI. All rights reserved. AI-Powered Financial Solutions for Everyone.</p>
             </div>
         </div>
     </footer>
 
+    </div>
+
     <script>
-        // Mobile responsiveness
-        const hamburger = document.querySelector('.hamburger');
         let isMobile = window.innerWidth <= 480;
 
         window.addEventListener('resize', () => {
             isMobile = window.innerWidth <= 480;
         });
 
-        // Carousel dots functionality
         const dots = document.querySelectorAll('.dot');
         let currentSlide = 0;
 
         function updateDots() {
             dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
+                const active = index === currentSlide;
+                dot.classList.toggle('active', active);
+                dot.classList.toggle('w-6', active);
+                dot.classList.toggle('rounded', active);
+                dot.classList.toggle('bg-white', active);
+                dot.classList.toggle('w-2', !active);
+                dot.classList.toggle('rounded-full', !active);
+                dot.classList.toggle('bg-white/50', !active);
             });
         }
 
@@ -777,13 +346,11 @@
             });
         });
 
-        // Auto-rotate carousel every 5 seconds
         setInterval(() => {
             currentSlide = (currentSlide + 1) % dots.length;
             updateDots();
         }, 5000);
 
-        // Product tile interactions
         document.querySelectorAll('.product-tile').forEach(tile => {
             tile.addEventListener('click', function() {
                 const label = this.querySelector('.product-label').textContent;
@@ -791,7 +358,6 @@
             });
         });
 
-        // Apply Now button
         document.querySelector('.btn-apply-now').addEventListener('click', function() {
             alert('Redirecting to Personal Loan Application...');
         });
