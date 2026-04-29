@@ -57,6 +57,27 @@
             box-shadow: 0 12px 28px rgba(78, 126, 176, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.75);
         }
 
+        .reveal-card {
+            opacity: 0;
+            transform: translateY(34px) scale(0.97);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+            transition-delay: var(--reveal-delay, 0s);
+            will-change: opacity, transform;
+        }
+
+        .reveal-card.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal-card {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+
         .product-tile::before {
             content: '';
             position: absolute;
@@ -142,20 +163,33 @@
         }
 
         .popular-badge {
-            position: relative;
+            position: absolute;
+            top: 18px;
+            right: -24px;
+            min-width: 122px;
+            padding: 0.22rem 0.65rem;
+            transform: rotate(38deg);
             overflow: hidden;
             background: linear-gradient(135deg, #f6d46b 0%, #d99a13 52%, #fff0a8 100%);
             color: #5f3d00;
-            box-shadow: 0 6px 14px rgba(217, 154, 19, 0.28);
+            font-size: 8px;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            line-height: 1.1;
+            text-align: center;
+            white-space: nowrap;
+            text-transform: uppercase;
+            box-shadow: 0 8px 18px rgba(217, 154, 19, 0.34);
+            z-index: 2;
         }
 
         .popular-badge::after {
             content: '';
             position: absolute;
-            top: -35%;
+            top: -20%;
             left: 0;
             width: 42%;
-            height: 170%;
+            height: 140%;
             background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.72) 50%, rgba(255, 255, 255, 0) 100%);
             animation: badgeShine 3.2s ease-in-out infinite;
             pointer-events: none;
@@ -181,15 +215,6 @@
             z-index: 2;
         }
 
-
-        .product-tile:nth-child(1) { animation-delay: 0.05s; }
-        .product-tile:nth-child(2) { animation-delay: 0.1s; }
-        .product-tile:nth-child(3) { animation-delay: 0.15s; }
-        .product-tile:nth-child(4) { animation-delay: 0.2s; }
-        .product-tile:nth-child(5) { animation-delay: 0.25s; }
-        .product-tile:nth-child(6) { animation-delay: 0.3s; }
-        .product-tile:nth-child(7) { animation-delay: 0.35s; }
-        .product-tile:nth-child(8) { animation-delay: 0.4s; }
 
         .hero-slide {
             opacity: 0;
@@ -329,12 +354,12 @@
 
     <section class="overflow-hidden px-4 py-5 text-textDark sm:py-[30px]" style="background: radial-gradient(circle at center, #8fdcff 0%, #68c6f2 36%, #4ca7e6 68%, #2f79c9 100%);">
         <div class="mx-auto flex max-w-[1400px] flex-col items-center justify-between gap-6 md:flex-row md:gap-[30px]">
-            <div class="min-w-0 flex-1 text-center md:text-left">
+            <div class="reveal-card min-w-0 flex-1 text-center md:text-left">
                 <h1 class="mb-[10px] text-[22px] font-bold leading-[1.25] sm:mb-3 sm:text-[28px] md:text-[32px]">AI-Powered Credit Solutions for Everyone</h1>
                 <p class="mb-4 text-[14px] leading-[1.6] opacity-95 sm:mb-5 sm:text-sm md:max-w-[560px] md:text-[15px]">Get instant access to credit products tailored by AI. Quick approval &#8226; Transparent process &#8226; Better rates</p>
             </div>
 
-            <div class="min-w-0 w-full flex-1 text-center md:text-right">
+            <div class="reveal-card min-w-0 w-full flex-1 text-center md:text-right">
                 <div class="relative mx-auto flex h-[220px] w-full max-w-[360px] items-center justify-center overflow-hidden rounded-2xl bg-white p-0 shadow-lg md:mr-0 md:h-[260px] md:max-w-[420px]">
                     <img src="./personal loan (1).png" alt="Personal loan" class="hero-slide hero-slide--wide active absolute inset-0 h-full w-full">
                     <img src="./home loan.png" alt="Home loan" class="hero-slide hero-slide--wide absolute inset-0 h-full w-full">
@@ -353,28 +378,28 @@
 
     <div class="mx-auto max-w-[1400px] px-4 py-5 sm:py-[30px]">
         <section class="mb-[30px] md:mb-10">
-            <h2 class="mb-4 flex items-center gap-2.5 text-sm font-bold uppercase tracking-[0.5px] text-textDark sm:mb-5 sm:text-base before:h-4 before:w-1 before:rounded before:bg-secondaryOrange before:content-['']">Loans</h2>
+            <h2 class="reveal-card mb-4 flex items-center gap-2.5 text-sm font-bold uppercase tracking-[0.5px] text-textDark sm:mb-5 sm:text-base before:h-4 before:w-1 before:rounded before:bg-secondaryOrange before:content-['']">Loans</h2>
 
             <div class="grid grid-cols-2 gap-3 sm:grid-cols-[repeat(auto-fit,minmax(120px,1fr))] sm:gap-3 md:grid-cols-[repeat(auto-fit,minmax(140px,1fr))] md:gap-4">
-                <div class="product-tile product-tile--shiny relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5">
-                    <img src="./personal pic.png" alt="Personal loan" class="product-icon-image mb-2 block sm:mb-3">
+                <div class="product-tile reveal-card product-tile--shiny relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5">
+                    <img src="./personal loan (2).png" alt="Personal loan" class="product-icon-image mb-2 block sm:mb-3">
                     <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Personal Loan</span>
-                    <span class="popular-badge mt-2 inline-block rounded-xl px-1.5 py-[3px] text-[9px] font-bold uppercase tracking-[0.5px] sm:px-2 sm:py-1 sm:text-[10px]">Popular</span>
+                    <span class="popular-badge">Popular</span>
                 </div>
 
-                <div class="product-tile relative mx-auto flex w-[92%] min-h-[122px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white px-2.5 py-3 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:w-[90%] sm:min-h-[132px] sm:px-3 sm:py-[14px] md:w-[88%] md:min-h-[148px] md:px-3.5 md:py-4">
+                <div class="product-tile reveal-card relative mx-auto flex w-[92%] min-h-[122px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white px-2.5 py-3 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:w-[90%] sm:min-h-[132px] sm:px-3 sm:py-[14px] md:w-[88%] md:min-h-[148px] md:px-3.5 md:py-4">
                     <img src="./gold pic.png" alt="Gold loan" class="product-icon-image mb-2 block sm:mb-3">
                     <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Gold Loan</span>
                     <span class="coming-soon-corner">Coming Soon</span>
                 </div>
 
-                <div class="product-tile relative mx-auto flex w-[92%] min-h-[122px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white px-2.5 py-3 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:w-[90%] sm:min-h-[132px] sm:px-3 sm:py-[14px] md:w-[88%] md:min-h-[148px] md:px-3.5 md:py-4">
+                <div class="product-tile reveal-card relative mx-auto flex w-[92%] min-h-[122px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white px-2.5 py-3 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:w-[90%] sm:min-h-[132px] sm:px-3 sm:py-[14px] md:w-[88%] md:min-h-[148px] md:px-3.5 md:py-4">
                     <img src="./bussines pic.png" alt="Business loan" class="product-icon-image mb-2 block sm:mb-3">
                     <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Business Loans</span>
                     <span class="coming-soon-corner">Coming Soon</span>
                 </div>
 
-                <div class="product-tile relative mx-auto flex w-[92%] min-h-[122px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white px-2.5 py-3 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:w-[90%] sm:min-h-[132px] sm:px-3 sm:py-[14px] md:w-[88%] md:min-h-[148px] md:px-3.5 md:py-4">
+                <div class="product-tile reveal-card relative mx-auto flex w-[92%] min-h-[122px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white px-2.5 py-3 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:w-[90%] sm:min-h-[132px] sm:px-3 sm:py-[14px] md:w-[88%] md:min-h-[148px] md:px-3.5 md:py-4">
                     <img src="./home pic.png" alt="Home loan" class="product-icon-image product-icon-image--home mb-2 block sm:mb-3">
                     <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Home Loan</span>
                     <span class="coming-soon-corner">Coming Soon</span>
@@ -383,20 +408,20 @@
         </section>
 
         <section class="mb-[30px] md:mb-10">
-            <h2 class="mb-4 flex items-center gap-2.5 text-sm font-bold uppercase tracking-[0.5px] text-textDark sm:mb-5 sm:text-base before:h-4 before:w-1 before:rounded before:bg-secondaryOrange before:content-['']">Credit Score & Emi Calculator</h2>
+            <h2 class="reveal-card mb-4 flex items-center gap-2.5 text-sm font-bold uppercase tracking-[0.5px] text-textDark sm:mb-5 sm:text-base before:h-4 before:w-1 before:rounded before:bg-secondaryOrange before:content-['']">Credit Score & Emi Calculator</h2>
 
             <div class="grid grid-cols-2 gap-3 sm:grid-cols-[repeat(auto-fit,minmax(120px,1fr))] sm:gap-3 md:grid-cols-[repeat(auto-fit,minmax(140px,1fr))] md:gap-4">
-                <div class="product-tile relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5">
+                <div class="product-tile reveal-card relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5">
                     <img src="./credit score.png" alt="Credit score" class="product-icon-image mb-2 block sm:mb-3">
                     <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Credit Score</span>
                 </div>
 
-                <div class="product-tile relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5">
+                <div class="product-tile reveal-card relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5">
                     <img src="./fre credit score.png" alt="Free credit score checker" class="product-icon-image mb-2 block sm:mb-3">
                     <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Free Credit Score Checker</span>
                 </div>
 
-                <div class="product-tile relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5" data-action="open-emi-calculator">
+                <div class="product-tile reveal-card relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5" data-action="open-emi-calculator">
                     <img src="./calculator.png" alt="EMI calculator" class="product-icon-image mb-2 block sm:mb-3">
                     <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Emi Calculator</span>
                 </div>
@@ -454,31 +479,31 @@
         </section>
 
         <section id="products" class="mb-[30px] scroll-mt-24 md:mb-10">
-            <h2 class="mb-4 flex items-center gap-2.5 text-sm font-bold uppercase tracking-[0.5px] text-textDark sm:mb-5 sm:text-base before:h-4 before:w-1 before:rounded before:bg-secondaryOrange before:content-['']">Basic AI Products Your Team Can Launch Fast</h2>
+            <h2 class="reveal-card mb-4 flex items-center gap-2.5 text-sm font-bold uppercase tracking-[0.5px] text-textDark sm:mb-5 sm:text-base before:h-4 before:w-1 before:rounded before:bg-secondaryOrange before:content-['']">Basic AI Products Your Team Can Launch Fast</h2>
 
             <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-                <div class="glass-card rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile">
+                <div class="reveal-card glass-card rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile">
                     <div class="mb-3 text-3xl">&#129504;</div>
                     <h3 class="mb-2 text-lg font-bold text-textDark">AI Credit Scoring</h3>
                     <p class="mb-4 text-sm leading-6 text-textGray">Predict borrower strength using transaction, bureau, and behavior data.</p>
                     <div class="inline-flex rounded-full bg-primaryBlue/10 px-3 py-1 text-xs font-semibold text-primaryBlue">Risk insights</div>
                 </div>
 
-                <div class="glass-card rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile">
+                <div class="reveal-card glass-card rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile">
                     <div class="mb-3 text-3xl">&#128202;</div>
                     <h3 class="mb-2 text-lg font-bold text-textDark">Loan Eligibility Checker</h3>
                     <p class="mb-4 text-sm leading-6 text-textGray">Instantly estimate approval chances and suggest loan ranges.</p>
                     <div class="inline-flex rounded-full bg-secondaryOrange/15 px-3 py-1 text-xs font-semibold text-[#B96D00]">Instant decisions</div>
                 </div>
 
-                <div class="glass-card rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile">
+                <div class="reveal-card glass-card rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile">
                     <div class="mb-3 text-3xl">&#128737;</div>
                     <h3 class="mb-2 text-lg font-bold text-textDark">Fraud Detection Monitor</h3>
                     <p class="mb-4 text-sm leading-6 text-textGray">Flag suspicious applications with anomaly and pattern detection.</p>
                     <div class="inline-flex rounded-full bg-red-50 px-3 py-1 text-xs font-semibold text-red-600">Live alerts</div>
                 </div>
 
-                <div class="glass-card rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile">
+                <div class="reveal-card glass-card rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile">
                     <div class="mb-3 text-3xl">&#128196;</div>
                     <h3 class="mb-2 text-lg font-bold text-textDark">Smart Document Parser</h3>
                     <p class="mb-4 text-sm leading-6 text-textGray">Extract PAN, Aadhaar, salary, and bank details from uploaded files.</p>
@@ -488,13 +513,13 @@
         </section>
 
         <section id="about" class="mb-[30px] scroll-mt-24 rounded-[24px] bg-gradient-to-br from-white to-[#eef4fb] p-6 md:mb-10 md:p-8">
-            <div class="mb-6">
+            <div class="reveal-card mb-6">
                 <p class="mb-2 text-sm font-semibold uppercase tracking-[0.24em] text-primaryBlue">About CreditgenAI</p>
                 <h2 class="text-2xl font-bold text-textDark md:text-3xl">Who We Are</h2>
             </div>
 
             <div class="grid gap-6 lg:grid-cols-2">
-                <div class="glass-card rounded-2xl p-6">
+                <div class="reveal-card glass-card rounded-2xl p-6">
                     <h3 class="mb-3 text-xl font-bold text-textDark">Leading Fintech Innovators</h3>
                     <p class="mb-5 text-sm leading-7 text-textGray">CreditgenAI is revolutionizing the lending landscape with cutting-edge AI technology. We're committed to making loans accessible, fast, and transparent for everyone.</p>
                     <div class="space-y-3 text-sm text-textDark">
@@ -504,7 +529,7 @@
                     </div>
                 </div>
 
-                <div class="glass-card rounded-2xl p-6">
+                <div class="reveal-card glass-card rounded-2xl p-6">
                     <h3 class="mb-3 text-xl font-bold text-textDark">Our Values</h3>
                     <p class="mb-5 text-sm leading-7 text-textGray">Trust & Transparency</p>
                     <p class="mb-5 text-sm leading-7 text-textGray">We believe in complete transparency and putting our customers first. Every decision we make is guided by our core values of integrity, innovation, and inclusion.</p>
@@ -518,13 +543,13 @@
         </section>
 
         <section id="mission-vision" class="mb-[30px] scroll-mt-24 md:mb-10">
-            <div class="mb-6">
+            <div class="reveal-card mb-6">
                 <p class="mb-2 text-sm font-semibold uppercase tracking-[0.24em] text-primaryBlue">Our Mission & Vision</p>
                 <h2 class="text-2xl font-bold text-textDark md:text-3xl">Building Intelligent Financial Access</h2>
             </div>
 
             <div class="grid gap-6 lg:grid-cols-2">
-                <div class="rounded-2xl bg-primaryBlue p-6 text-white md:p-8">
+                <div class="reveal-card rounded-2xl bg-primaryBlue p-6 text-white md:p-8">
                     <h3 class="mb-3 text-xl font-bold">Our Mission</h3>
                     <p class="mb-4 text-lg font-semibold text-white/90">Empower Financial Freedom</p>
                     <p class="mb-5 text-sm leading-7 text-white/85">To empower individuals and businesses with accessible, transparent, and intelligent financial solutions. We leverage cutting-edge AI technology to deliver personalized loan experiences that transform dreams into reality.</p>
@@ -535,7 +560,7 @@
                     </div>
                 </div>
 
-                <div class="rounded-2xl bg-[#0f2039] p-6 text-white md:p-8">
+                <div class="reveal-card rounded-2xl bg-[#0f2039] p-6 text-white md:p-8">
                     <h3 class="mb-3 text-xl font-bold">Our Vision</h3>
                     <p class="mb-4 text-lg font-semibold text-white/90">Revolutionize Financial Services</p>
                     <p class="mb-5 text-sm leading-7 text-white/85">To be the most trusted and innovative fintech platform in Asia, revolutionizing the lending industry through artificial intelligence. We envision a future where financial empowerment is instant and affordable for everyone.</p>
@@ -552,7 +577,7 @@
     <footer class="mt-[60px] bg-textDark px-4 py-10 text-white">
         <div class="mx-auto max-w-[1400px]">
             <div class="mb-[30px] grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-[24px] lg:grid-cols-4 lg:gap-[30px]">
-                <div>
+                <div class="reveal-card">
                     <h4 class="mb-4 text-sm font-semibold">About Us</h4>
                     <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">Who We Are</a>
                     <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">Careers</a>
@@ -560,7 +585,7 @@
                     <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">Press</a>
                 </div>
 
-                <div>
+                <div class="reveal-card">
                     <h4 class="mb-4 text-sm font-semibold">Products</h4>
                     <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">Personal Loans</a>
                     <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">Home Loans</a>
@@ -568,7 +593,7 @@
                     <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">Insurance</a>
                 </div>
 
-                <div>
+                <div class="reveal-card">
                     <h4 class="mb-4 text-sm font-semibold">Support</h4>
                     <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">Contact Us</a>
                     <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">FAQs</a>
@@ -576,7 +601,7 @@
                     <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">Security</a>
                 </div>
 
-                <div>
+                <div class="reveal-card">
                     <h4 class="mb-4 text-sm font-semibold">Legal</h4>
                     <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">Privacy Policy</a>
                     <a href="#" class="mb-2.5 block text-[13px] text-white/70 no-underline transition-colors duration-300 hover:text-white">Terms & Conditions</a>
@@ -596,6 +621,7 @@
     <script>
         const dots = document.querySelectorAll('.dot');
         const heroSlides = document.querySelectorAll('.hero-slide');
+        const revealCards = document.querySelectorAll('.reveal-card');
         const mobileMenuButton = document.querySelector('#mobile-menu-button');
         const mobileNav = document.querySelector('#mobile-nav');
         const emiCalculatorTrigger = document.querySelector('[data-action="open-emi-calculator"]');
@@ -692,6 +718,37 @@
             });
         }
 
+        function setupCardReveal() {
+            if (!revealCards.length) {
+                return;
+            }
+
+            revealCards.forEach((card, index) => {
+                card.style.setProperty('--reveal-delay', `${index * 0.08}s`);
+            });
+
+            if (!('IntersectionObserver' in window)) {
+                revealCards.forEach(card => card.classList.add('is-visible'));
+                return;
+            }
+
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
+
+                    entry.target.classList.add('is-visible');
+                    revealObserver.unobserve(entry.target);
+                });
+            }, {
+                threshold: 0.18,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            revealCards.forEach(card => revealObserver.observe(card));
+        }
+
         dots.forEach((dot, index) => {
             dot.addEventListener('click', () => {
                 currentSlide = index;
@@ -754,6 +811,7 @@
             });
         }
 
+        setupCardReveal();
         computeEmi();
     </script>
 </body>
