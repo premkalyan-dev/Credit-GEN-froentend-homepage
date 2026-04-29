@@ -74,6 +74,17 @@
             transform: scaleX(1);
         }
 
+        .product-icon-image {
+            width: 68px;
+            height: 68px;
+            object-fit: contain;
+        }
+
+        .product-icon-image--home {
+            width: 76px;
+            height: 76px;
+        }
+
         .glass-card {
             background:
                 radial-gradient(circle at top left, rgba(160, 198, 255, 0.4) 0%, rgba(160, 198, 255, 0.1) 24%, rgba(255, 255, 255, 0.97) 58%),
@@ -100,6 +111,24 @@
             }
         }
 
+        @keyframes badgeShine {
+            0% {
+                transform: translateX(-170%) skewX(-24deg);
+                opacity: 0;
+            }
+            18% {
+                opacity: 0.55;
+            }
+            42% {
+                transform: translateX(240%) skewX(-24deg);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(240%) skewX(-24deg);
+                opacity: 0;
+            }
+        }
+
         .product-tile--shiny::after {
             content: '';
             position: absolute;
@@ -109,6 +138,26 @@
             height: 140%;
             background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.55) 50%, rgba(255, 255, 255, 0) 100%);
             animation: personalLoanShine 3.8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .popular-badge {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f6d46b 0%, #d99a13 52%, #fff0a8 100%);
+            color: #5f3d00;
+            box-shadow: 0 6px 14px rgba(217, 154, 19, 0.28);
+        }
+
+        .popular-badge::after {
+            content: '';
+            position: absolute;
+            top: -35%;
+            left: 0;
+            width: 42%;
+            height: 170%;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.72) 50%, rgba(255, 255, 255, 0) 100%);
+            animation: badgeShine 3.2s ease-in-out infinite;
             pointer-events: none;
         }
 
@@ -308,25 +357,25 @@
 
             <div class="grid grid-cols-2 gap-3 sm:grid-cols-[repeat(auto-fit,minmax(120px,1fr))] sm:gap-3 md:grid-cols-[repeat(auto-fit,minmax(140px,1fr))] md:gap-4">
                 <div class="product-tile product-tile--shiny relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5">
-                    <span class="mb-2 block text-[28px] sm:text-[32px] md:mb-3 md:text-[40px]">&#128179;</span>
+                    <img src="./personal pic.png" alt="Personal loan" class="product-icon-image mb-2 block sm:mb-3">
                     <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Personal Loan</span>
-                    <span class="mt-2 inline-block rounded-xl bg-greenAccent px-1.5 py-[3px] text-[9px] font-bold uppercase tracking-[0.5px] text-white sm:px-2 sm:py-1 sm:text-[10px]">Popular</span>
+                    <span class="popular-badge mt-2 inline-block rounded-xl px-1.5 py-[3px] text-[9px] font-bold uppercase tracking-[0.5px] sm:px-2 sm:py-1 sm:text-[10px]">Popular</span>
                 </div>
 
-                <div class="product-tile relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5">
-                    <span class="mb-2 block text-[28px] sm:text-[32px] md:mb-3 md:text-[40px]">&#127919;</span>
+                <div class="product-tile relative mx-auto flex w-[92%] min-h-[122px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white px-2.5 py-3 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:w-[90%] sm:min-h-[132px] sm:px-3 sm:py-[14px] md:w-[88%] md:min-h-[148px] md:px-3.5 md:py-4">
+                    <img src="./gold pic.png" alt="Gold loan" class="product-icon-image mb-2 block sm:mb-3">
                     <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Gold Loan</span>
                     <span class="coming-soon-corner">Coming Soon</span>
                 </div>
 
-                <div class="product-tile relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5">
-                    <span class="mb-2 block text-[28px] sm:text-[32px] md:mb-3 md:text-[40px]">&#127970;</span>
+                <div class="product-tile relative mx-auto flex w-[92%] min-h-[122px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white px-2.5 py-3 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:w-[90%] sm:min-h-[132px] sm:px-3 sm:py-[14px] md:w-[88%] md:min-h-[148px] md:px-3.5 md:py-4">
+                    <img src="./bussines pic.png" alt="Business loan" class="product-icon-image mb-2 block sm:mb-3">
                     <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Business Loans</span>
                     <span class="coming-soon-corner">Coming Soon</span>
                 </div>
 
-                <div class="product-tile relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5">
-                    <span class="mb-2 block text-[28px] sm:text-[32px] md:mb-3 md:text-[40px]">&#127968;</span>
+                <div class="product-tile relative mx-auto flex w-[92%] min-h-[122px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white px-2.5 py-3 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:w-[90%] sm:min-h-[132px] sm:px-3 sm:py-[14px] md:w-[88%] md:min-h-[148px] md:px-3.5 md:py-4">
+                    <img src="./home pic.png" alt="Home loan" class="product-icon-image product-icon-image--home mb-2 block sm:mb-3">
                     <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Home Loan</span>
                     <span class="coming-soon-corner">Coming Soon</span>
                 </div>
@@ -338,17 +387,17 @@
 
             <div class="grid grid-cols-2 gap-3 sm:grid-cols-[repeat(auto-fit,minmax(120px,1fr))] sm:gap-3 md:grid-cols-[repeat(auto-fit,minmax(140px,1fr))] md:gap-4">
                 <div class="product-tile relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5">
-                    <span class="mb-2 block text-[28px] sm:text-[32px] md:mb-3 md:text-[40px]">&#128202;</span>
+                    <img src="./credit score.png" alt="Credit score" class="product-icon-image mb-2 block sm:mb-3">
                     <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Credit Score</span>
                 </div>
 
                 <div class="product-tile relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5">
-                    <span class="mb-2 block text-[28px] sm:text-[32px] md:mb-3 md:text-[40px]">&#128451;&#65039;</span>
+                    <img src="./fre credit score.png" alt="Free credit score checker" class="product-icon-image mb-2 block sm:mb-3">
                     <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Free Credit Score Checker</span>
                 </div>
 
                 <div class="product-tile relative flex min-h-[130px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[10px] border border-borderLight bg-white p-[14px] text-center transition-all duration-300 hover:-translate-y-1 hover:border-primaryBlue hover:shadow-tile sm:min-h-[140px] sm:p-4 md:min-h-[160px] md:p-5" data-action="open-emi-calculator">
-                    <span class="mb-2 block text-[28px] sm:text-[32px] md:mb-3 md:text-[40px]">&#128241;</span>
+                    <img src="./calculator.png" alt="EMI calculator" class="product-icon-image mb-2 block sm:mb-3">
                     <span class="product-label text-[11px] font-semibold leading-[1.4] text-textDark sm:text-xs md:text-[13px]">Emi Calculator</span>
                 </div>
             </div>
